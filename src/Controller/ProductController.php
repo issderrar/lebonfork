@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+    private $repository;
 
     public function __construct(ProductRepository $repository)
     {
@@ -25,6 +26,27 @@ class ProductController extends AbstractController
         $products = $this->repository->findAll();
         dump($products);
         return $this->render('product/index.html.twig', [
+            'current_menu' => 'products'
+        ]);
+    }
+
+    /**
+     * @Route("/products/{slug}-{id}", name="product.show", requirements={"slug": "[a-z0-9\-]*"})
+     * @param Product $product
+     * @param string $slug
+     * @return Response
+     */
+    public function show(Product $product, string $slug): Response
+    {
+        if ($product->getSlug() !== $slug) {
+            return $this->redirectToRoute('product.show', [
+                'id' => $product->getId(),
+                'slug' => $product->getSlug()
+            ], 301);
+        }
+        $product = $this->repository->find($product->getId());
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
             'current_menu' => 'products'
         ]);
     }

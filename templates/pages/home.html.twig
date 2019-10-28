@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="">{{ product.title }}</a>
+                                <a href="{{ path('product.show', {id: product.id, slug: product.slug}) }}">{{ product.title }}</a>
                             </h5>
                             <p class="card-test">{{ product.description }}</p>
                             <div class="text-danger" style="font-weight: bold; font-size: 3rem;">{{ product.price }} €</div>
