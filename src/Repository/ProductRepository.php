@@ -28,6 +28,16 @@ class ProductRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findAllByPriceAsc()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.price', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

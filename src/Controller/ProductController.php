@@ -26,7 +26,8 @@ class ProductController extends AbstractController
         $products = $this->repository->findAll();
         dump($products);
         return $this->render('product/index.html.twig', [
-            'current_menu' => 'products'
+            'current_menu' => 'products',
+            'products' => $products
         ]);
     }
 
@@ -50,4 +51,21 @@ class ProductController extends AbstractController
             'current_menu' => 'products'
         ]);
     }
+
+
+    /**
+     * @Route("/product/ascendant",name="product.ascendant")
+     * @return Response
+     *
+     */
+    public function ascendant(): Response
+    {
+        $products = $this->repository->findAllByPriceAsc();
+        dump($products);
+        return $this->render('product/ascendant.html.twig', [
+            'current_menu' => 'ascendant',
+            'products' => $products
+        ]);
+    }
+
 }

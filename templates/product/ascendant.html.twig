@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{%  block title "Voir les biens" %}
+
+{% block body %}
+
+
+    <div class="jumbotron text-center">
+        <h1>Les biens</h1>
+        <p>Voici les biens en vente par ordre croissant</p>
+    </div>
+    <div class="contrainer mt-4">
+        <h1>Tous les biens</h1>
+
+        {%  for product in products %}
+            <div class="col-2" style="display: inline-block; margin: 20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('product.show', {id: product.id, slug: product.slug}) }}">{{ product.title }}</a>
+                        </h5>
+                        <p class="card-test">{{ product.description }}</p>
+                        <div class="text-danger" style="font-weight: bold; font-size: 3rem;">{{ product.price }} €</div>
+                    </div>
+                </div>
+            </div>
+        {%  endfor %}
+    </div>
+
+{% endblock %}
